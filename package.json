@@ -1,0 +1,59 @@
+{
+  "name": "vue-lazy-components-option",
+  "version": "0.0.0",
+  "author": "katashin",
+  "description": "Provide lazyComponents option for Vue components",
+  "keywords": [
+    "Vue.js",
+    "lazy",
+    "circular dependency",
+    "cyclic dependency",
+    "component",
+    "component options"
+  ],
+  "license": "MIT",
+  "main": "dist/vue-lazy-components-option.cjs.js",
+  "module": "dist/vue-lazy-components-option.esm.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "homepage": "https://github.com/ktsn/vue-lazy-components-option",
+  "bugs": "https://github.com/ktsn/vue-lazy-components-option/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ktsn/vue-lazy-components-option.git"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run test && npm run clean && npm run build",
+    "clean": "rm -rf lib dist .tmp",
+    "dev": "jest --watch",
+    "build": "npm run build:ts && npm run build:rollup",
+    "build:ts": "tsc -p src",
+    "build:rollup": "node scripts/build.js",
+    "lint": "eslint --ext js,ts scripts src test",
+    "lint:fix": "eslint --ext js,ts --fix scripts src test",
+    "test": "npm run lint && npm run test:unit",
+    "test:unit": "jest -w 2"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.1",
+    "@vue/test-utils": "^1.0.0-beta.24",
+    "eslint": "^5.3.0",
+    "eslint-config-ktsn-typescript": "^1.1.4",
+    "eslint-config-ktsn-vue": "^1.0.1",
+    "jest": "^23.5.0",
+    "jest-serializer-vue": "^2.0.2",
+    "prettier": "1.14.2",
+    "prettier-config-ktsn": "^1.0.0",
+    "rollup": "^0.65.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "ts-jest": "^23.1.4",
+    "typescript": "^3.0.1",
+    "uglify-js": "^3.4.7",
+    "vue": "^2.5.17",
+    "vue-jest": "^2.6.0",
+    "vue-template-compiler": "^2.5.17"
+  }
+}
