@@ -1,6 +1,6 @@
 {
   "name": "vue-lazy-components-option",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "katashin",
   "description": "Provide lazyComponents option for Vue components",
   "keywords": [
