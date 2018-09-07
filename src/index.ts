@@ -1,3 +1,4 @@
+import './augment'
 import _Vue from 'vue'
 
 function install(Vue: typeof _Vue): void {
@@ -17,12 +18,3 @@ function install(Vue: typeof _Vue): void {
 }
 
 export default { install }
-
-declare module 'vue/types/options' {
-  interface ComponentOptions<V extends _Vue> {
-    lazyComponents?: () => Record<
-      string,
-      Component<any, any, any, any> | AsyncComponent<any, any, any, any>
-    >
-  }
-}
