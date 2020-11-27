@@ -35,6 +35,27 @@ export default {
 </script>
 ```
 
+### Mixin Usage
+
+You also can partially enable `lazyComponents` option in a specific component by using a mixin. In this usage, you do not have to register this library globally with `Vue.use`:
+
+```vue
+<script>
+import { lazyComponentsMixin } from 'vue-lazy-components-option'
+import Foo from './Foo.vue'
+import Bar from './Bar.vue'
+
+export default {
+  mixins: [lazyComponentsMixin],
+
+  lazyComponents: () => ({
+    Foo,
+    Bar
+  })
+}
+</script>
+```
+
 ## What is it for?
 
 This small library is meant to be used for dealing with circular dependency among your components.
