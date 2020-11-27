@@ -13,8 +13,8 @@ describe('lazyComponents option', () => {
     const wrapper = mount(Node, {
       localVue,
       propsData: {
-        value: ['foo', ['bar', 'baz']]
-      }
+        value: ['foo', ['bar', 'baz']],
+      },
     })
     expect(wrapper.html()).toMatchInlineSnapshot(`
 <ul>
@@ -39,31 +39,31 @@ describe('lazyComponents option', () => {
     const Foo = {
       render(h: Function) {
         return h('div', 'foo')
-      }
+      },
     }
 
     const LazyFoo = {
       render(h: Function) {
         return h('div', 'lazy-foo')
-      }
+      },
     }
 
     const Root = {
       components: {
-        Foo
+        Foo,
       },
 
       lazyComponents: () => ({
-        Foo: LazyFoo
+        Foo: LazyFoo,
       }),
 
       render(h: Function) {
         return h('Foo')
-      }
+      },
     }
 
     const wrapper = mount(Root, {
-      localVue
+      localVue,
     })
     expect(wrapper.html()).toMatchInlineSnapshot(`<div>foo</div>`)
   })

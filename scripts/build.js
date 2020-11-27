@@ -1,4 +1,3 @@
-/* eslint-disable typescript/no-var-requires */
 const fs = require('fs')
 const { rollup } = require('rollup')
 const replace = require('rollup-plugin-replace')
@@ -20,9 +19,10 @@ const baseConfig = {
   input: 'lib/index.js',
   output: {
     name: capitalize(pkg.name),
-    banner
+    exports: 'named',
+    banner,
   },
-  plugins: []
+  plugins: [],
 }
 
 function run(options) {
@@ -32,9 +32,9 @@ function run(options) {
   const config = genConfig(head)
 
   return build(config)
-    .then(bundle => write(config, bundle, head.env === 'production'))
+    .then((bundle) => write(config, bundle, head.env === 'production'))
     .then(() => run(tail))
-    .catch(err => {
+    .catch((err) => {
       console.error(err.stack)
       process.exit(1)
     })
@@ -45,14 +45,14 @@ function genConfig(options) {
 
   res.output = Object.assign({}, res.output, {
     file: options.output,
-    format: options.format
+    format: options.format,
   })
 
   if (options.env) {
     res.plugins = res.plugins.concat([
       replace({
-        'process.env.NODE_ENV': JSON.stringify(options.env)
-      })
+        'process.env.NODE_ENV': JSON.stringify(options.env),
+      }),
     ])
   }
 
@@ -69,10 +69,12 @@ function write(config, bundle, prod) {
   } else {
     return bundle
       .generate(config.output)
-      .then(minify)
+      .then((res) => {
+        return minify(res.output[0])
+      })
       .then(({ code }) => {
         return new Promise((resolve, reject) => {
-          fs.writeFile(config.output.file, code, err => {
+          fs.writeFile(config.output.file, code, (err) => {
             if (err) {
               return reject(err)
             }
@@ -86,12 +88,12 @@ function write(config, bundle, prod) {
 function minify({ code }) {
   return uglify.minify(code, {
     compress: {
-      toplevel: true
+      toplevel: true,
     },
     output: {
       beautify: false,
-      comments: /(?:^!|@license)/
-    }
+      comments: /(?:^!|@license)/,
+    },
   })
 }
 

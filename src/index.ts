@@ -12,11 +12,11 @@ export const lazyComponentsMixin: ComponentOptions<_Vue> = {
       const components = this.$options.components!
       const resolved = lazyComponents()
 
-      Object.keys(resolved).forEach(key => {
+      Object.keys(resolved).forEach((key) => {
         components[key] = components[key] || resolved[key]
       })
     }
-  }
+  },
 }
 
 export default { install }
